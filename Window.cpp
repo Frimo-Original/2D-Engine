@@ -16,8 +16,7 @@ Engine::Window::~Window() {
 }
 
 void Engine::Window::setGameScene(Engine::GameScene* scene) {
-    /*if (scene != NULL)
-        delete scene;*/
+    delete this->scene;
 
     this->scene = scene;
 }

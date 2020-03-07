@@ -2,6 +2,8 @@
 
 #include "GameScene.h"
 #include "Window.h"
+#include "FirstLevel.h"
+
 #include <iostream>
 
 using namespace Engine;
@@ -10,17 +12,7 @@ int main()
 {
     Window* window = new Window(1100, 700, "Game", false);
 
-    Textures* texturesLevels = new Textures();
-    texturesLevels->addTexture(1, "wall.png");
-
-    GameScene* oneLevel = new GameScene({ 44, 28 }, { 50, 50 }, texturesLevels);
-    oneLevel->setFloor(new Floor({ 22, 14 }, { 201, 199 }, new GameTexture("floor_test.png")));
-    oneLevel->setWalls(0, "0001000001");
-    oneLevel->setWalls(1, "0001000001");
-    oneLevel->setWalls(2, "0001000001");
-    window->setGameScene(oneLevel);
-
-    //GameObject* player = new GameObject(oneLevel);
+    window->setGameScene(FirstLevel().getGameScene());
 
     window->launch();
     window->close();
@@ -31,6 +23,8 @@ int main()
 class Player : public GameObject
 {
 public:
+    Player(GameScene* scene, Textures* textures, Vector2i size) : GameObject(scene, textures, size) { }
+
     void run() override {
 
     }
