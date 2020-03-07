@@ -35,6 +35,7 @@ namespace Engine
 		void setFloor(Floor* floor);
 		void setTextures(Textures* textures);
 		void draw(sf::RenderWindow* window);
+		void run(int time);
 
 		Vector2i getCount();
 

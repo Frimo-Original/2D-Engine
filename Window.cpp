@@ -60,6 +60,7 @@ void Engine::Window::draw()
    
     while (window->isOpen()) {
         sf::sleep(sf::milliseconds(SYSTEM_DELAY));
+        scene->run(SYSTEM_DELAY);
         window->clear();
 
         if (scene != NULL)

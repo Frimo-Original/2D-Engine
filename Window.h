@@ -14,7 +14,7 @@ namespace Engine
 		GameScene* scene = NULL;
 		std::thread th;
 
-		const int SYSTEM_DELAY = 16;
+		const int SYSTEM_DELAY = 15;
 
 		bool visible;
 		bool isClose;

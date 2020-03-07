@@ -1,7 +1,9 @@
 #include "GameObject.h"
 
 Engine::GameObject::GameObject(GameScene* scene, Textures* textures, Vector2i size) :
-	scene(scene), textures(textures), size(size) { }
+	scene(scene), textures(textures), size(size) {
+	//texture = textures->getTexture(0);
+}
 
 Engine::GameObject::~GameObject() {
 	delete textures;
@@ -17,7 +19,9 @@ void Engine::GameObject::setTexture(int number) {
 }
 
 void Engine::GameObject::draw(sf::RenderWindow* window) {
-	window->draw(sf::Sprite(*texture));
+	sf::Sprite sp = sf::Sprite(*texture);
+	sp.setPosition(getPosition().getX(), getPosition().getY());
+	window->draw(sp);
 }
 
 void Engine::GameObject::setSize(Vector2i size) {

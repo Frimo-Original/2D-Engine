@@ -55,6 +55,11 @@ void Engine::GameScene::setTextures(Textures* textures) {
 	this->textures = textures;
 }
 
+void Engine::GameScene::run(int time) {
+	for (GameObject* obj : gameObjects)
+		obj->run(time);
+}
+
 void Engine::GameScene::draw(sf::RenderWindow* window)
 {
 	if (floor != NULL)
@@ -67,6 +72,9 @@ void Engine::GameScene::draw(sf::RenderWindow* window)
 				sprite.setPosition(j * size.getX(), i * size.getY());
 				window->draw(sprite);
 			}
+
+	for (GameObject* obj : gameObjects)
+		obj->draw(window);
 }
 
 void Engine::GameScene::setWalls(int numberRow, std::string row)

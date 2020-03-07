@@ -38,9 +38,8 @@ namespace Engine
 		void setSpeed(Vector2f speed);
 		Vector2f getSpeed();
 
-		virtual void run() = 0;
+		virtual void run(int time) = 0;
 
 		void draw(sf::RenderWindow* window);
-
 	};
 }

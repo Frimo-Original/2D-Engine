@@ -9,6 +9,8 @@ FirstLevel::FirstLevel() {
 	scene->setWalls(1, "0000100000");
 	scene->setWalls(2, "0000100000");
 	scene->setWalls(4, "1111100000");
+
+	scene->addObject(new Player(scene, { 50, 50 }));
 }
 
 GameScene* FirstLevel::getGameScene() {
