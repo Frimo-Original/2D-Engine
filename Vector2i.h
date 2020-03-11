@@ -16,6 +16,8 @@ namespace Engine
 		void setY(int y);
 		int getY();
 
-		float getLength();
+		int getLength();
+
+		int getDistance(Vector2i vector);
 	};
 }

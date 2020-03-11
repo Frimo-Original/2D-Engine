@@ -1,5 +1,7 @@
 #include "Player.h"
 
+#include <iostream>
+
 Player::Player(GameScene* scene, Vector2i size) : GameObject(scene, NULL, size) {
     Textures* textures = new Textures();
     textures->addTexture(0, "Textures/Humans/Human.png");
@@ -134,8 +136,35 @@ void Player::run(int time)
         }
     }
 
-    if (getSpeed().getX() != 0)
-        setPosition({ (int) (getPosition().getX() + getSpeed().getX() * time), getPosition().getY() });
+    /*if (getSpeed().getX() != 0) {
+
+        setPosition(getScene()->getMovingX({ (int)(getPosition().getX() + getSpeed().getX() * time), getPosition().getY() }, getSize()));
+    }*/
+
+    if (getSpeed().getX() > 0) {
+        Vector2i newPosition = { (int)(getPosition().getX() + getSpeed().getX() * time) + getSize().getX(), getPosition().getY() };
+        Vector2i newCellPosition = getScene()->getCellPosition(newPosition);
+
+        if (!getScene()->isWall(newCellPosition))
+            setPosition({ newPosition.getX() - getSize().getX(), newPosition.getY() });
+        else {
+            setPosition({ getScene()->getSize().getX() * newCellPosition.getX() - getSize().getX(), newPosition.getY() });
+            setSpeed({ 0, getSpeed().getY() });
+        }
+    }
+    else if (getSpeed().getX() < 0) {
+        Vector2i newPosition = { (int)(getPosition().getX() + getSpeed().getX() * time), getPosition().getY() };
+        Vector2i newCellPosition = getScene()->getCellPosition(newPosition);
+
+        std::cout << getPosition().getX() << "  " << newCellPosition.getX() << std::endl;
+
+        if (!getScene()->isWall(newCellPosition))
+            setPosition({ newPosition.getX(), newPosition.getY() });
+        else {
+            setPosition({ getScene()->getSize().getX() * (newCellPosition.getX() + 1), newPosition.getY() });
+            setSpeed({ 0, getSpeed().getY() });
+        }
+    }
 
     if (getSpeed().getY() != 0)
         setPosition({ getPosition().getX(), (int) (getPosition().getY() + getSpeed().getY() * time) });

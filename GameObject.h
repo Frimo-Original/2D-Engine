@@ -19,7 +19,7 @@ namespace Engine
 		sf::Texture* texture;
 
 		Vector2f speed = { 0, 0 };
-		Vector2i position = {0, 0};
+		Vector2i position;
 		Vector2i size;
 
 	public:
@@ -37,6 +37,8 @@ namespace Engine
 
 		void setSpeed(Vector2f speed);
 		Vector2f getSpeed();
+
+		GameScene* getScene();
 
 		virtual void run(int time) = 0;
 

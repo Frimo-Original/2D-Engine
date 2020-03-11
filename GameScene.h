@@ -38,11 +38,15 @@ namespace Engine
 		void run(int time);
 
 		Vector2i getCount();
+		Vector2i getSize();
 
 		void addObject(GameObject* object);
 		void deleteObject(GameObject* object);
 
 		void fillScene(int value);
 		void setWalls(int numberRow, std::string row);
+
+		Vector2i getCellPosition(Vector2i coordinats);
+		bool isWall(Vector2i cellPosition);
 	};
 }

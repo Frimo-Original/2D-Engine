@@ -17,5 +17,7 @@ namespace Engine
 		float getY();
 
 		float getLength();
+
+		float getDistance(Vector2f vector);
 	};
 }

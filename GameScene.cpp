@@ -27,6 +27,10 @@ Engine::Vector2i Engine::GameScene::getCount() {
 	return count;
 }
 
+Engine::Vector2i Engine::GameScene::getSize() {
+	return size;
+}
+
 void Engine::GameScene::addObject(GameObject* object) {
 	gameObjects.push_back(object);
 }
@@ -86,4 +90,16 @@ void Engine::GameScene::setWalls(int numberRow, std::string row)
 				scene[numberRow][i] = atoi(&c);
 			}
 		}
+}
+
+Engine::Vector2i Engine::GameScene::getCellPosition(Engine::Vector2i coordinats) {
+	return { (int)(coordinats.getX() / size.getX()), (int)(coordinats.getY() / size.getY()) };
+}
+
+bool Engine::GameScene::isWall(Vector2i cellPosition) {
+	if (cellPosition.getX() < 0 || cellPosition.getY() < 0 || scene[cellPosition.getY()][cellPosition.getX()] >= 1 ||
+		cellPosition.getX() > count.getX() || cellPosition.getY() > count.getY())
+		return true;
+	return false;
+
 }

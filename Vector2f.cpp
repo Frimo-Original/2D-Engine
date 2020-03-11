@@ -26,3 +26,7 @@ float Engine::Vector2f::getY() {
 float Engine::Vector2f::getLength() {
 	return sqrt(pow(x, 2) + pow(y, 2));
 }
+
+float Engine::Vector2f::getDistance(Engine::Vector2f vector) {
+	return sqrt(pow((vector.getX() - getX()), 2) + pow((vector.getY() - getY()), 2));
+}

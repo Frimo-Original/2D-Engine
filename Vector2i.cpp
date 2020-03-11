@@ -23,6 +23,10 @@ int Engine::Vector2i::getY() {
 	return y;
 }
 
-float Engine::Vector2i::getLength() {
+int Engine::Vector2i::getLength() {
 	return sqrt(pow(x, 2) + pow(y, 2));
+}
+
+int Engine::Vector2i::getDistance(Engine::Vector2i vector) {
+	return sqrt(pow((vector.getX() - getX()), 2) + pow((vector.getY() - getY()), 2));
 }

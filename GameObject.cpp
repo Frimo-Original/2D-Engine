@@ -2,7 +2,7 @@
 
 Engine::GameObject::GameObject(GameScene* scene, Textures* textures, Vector2i size) :
 	scene(scene), textures(textures), size(size) {
-	//texture = textures->getTexture(0);
+	position = size;
 }
 
 Engine::GameObject::~GameObject() {
@@ -46,4 +46,8 @@ void Engine::GameObject::setSpeed(Engine::Vector2f speed) {
 
 Engine::Vector2f Engine::GameObject::getSpeed() {
 	return speed;
+}
+
+Engine::GameScene* Engine::GameObject::getScene() {
+	return scene;
 }
