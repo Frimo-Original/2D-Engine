@@ -93,7 +93,19 @@ void Engine::GameScene::setWalls(int numberRow, std::string row)
 }
 
 Engine::Vector2i Engine::GameScene::getCellPosition(Engine::Vector2i coordinats) {
-	return { (int)(coordinats.getX() / size.getX()), (int)(coordinats.getY() / size.getY()) };
+	Vector2i cellPosition = { 0, 0 };
+	
+	if (coordinats.getX() < 0)
+		cellPosition.setX(-1);
+	else
+		cellPosition.setX((int)(coordinats.getX() / size.getX()));
+	if (coordinats.getY() < 0)
+		cellPosition.setY(-1);
+	else
+		cellPosition.setY((int)(coordinats.getY() / size.getY()));
+
+	return cellPosition;
+	//return { (int)(coordinats.getX() / size.getX()), (int)(coordinats.getY() / size.getY()) };
 }
 
 bool Engine::GameScene::isWall(Vector2i cellPosition) {
