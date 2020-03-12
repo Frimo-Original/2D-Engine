@@ -7,6 +7,8 @@
 
 namespace Engine
 {
+	class GameScene;
+
 	class Window
 	{
 	private:
@@ -25,11 +27,12 @@ namespace Engine
 
 		void setGameScene(GameScene* scene);
 
+		void setView(sf::View view);
+
 		void setVisible(bool visible);
 		bool getVisible();
 
 		void launch();
-		void close();
 
 	private:
 		void lifeCycle();

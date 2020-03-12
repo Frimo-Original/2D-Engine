@@ -15,8 +15,8 @@ Player::Player(GameScene* scene, Vector2i size) : GameObject(scene, NULL, size) 
 void Player::run(int time)
 {
     float accelerationRun = 0.01;
-    float accelerationStop = 0.003;
-    float maxSpeed = 0.3;
+    float accelerationStop = 0.001;  //0.003
+    float maxSpeed = 0.3;  //0.3
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
@@ -136,38 +136,54 @@ void Player::run(int time)
         }
     }
 
-    /*if (getSpeed().getX() != 0) {
-
-        setPosition(getScene()->getMovingX({ (int)(getPosition().getX() + getSpeed().getX() * time), getPosition().getY() }, getSize()));
-    }*/
-
     if (getSpeed().getX() > 0) {
-        Vector2i newPosition = { (int)(getPosition().getX() + getSpeed().getX() * time) + getSize().getX(), getPosition().getY() };
-        Vector2i newCellPosition = getScene()->getCellPosition(newPosition);
+        Vector2i newPosition = { (int)(getPosition().getX() + getSpeed().getX() * time), getPosition().getY() };
 
-        if (!getScene()->isWall(newCellPosition, getSize()))
-            setPosition({ newPosition.getX() - getSize().getX(), newPosition.getY() });
-        else {
-            setPosition({ getScene()->getSize().getX() * newCellPosition.getX() - getSize().getX(), newPosition.getY() });
+        if (!getScene()->isWall(newPosition, getSize()))
+            setPosition({ newPosition.getX(), newPosition.getY() });
+        else
             setSpeed({ 0, getSpeed().getY() });
-        }
     }
     else if (getSpeed().getX() < 0) {
         Vector2i newPosition = { (int)(getPosition().getX() + getSpeed().getX() * time), getPosition().getY() };
-        Vector2i newCellPosition = getScene()->getCellPosition(newPosition);
 
-        //getScene()->checkWall(newPosition, getSize());
-        //std::cout << getScene()->checkWall(newPosition, getSize());
-        //std::cout << getPosition().getX() << "  " << newCellPosition.getX() << std::endl;
-
-        if (/*!getScene()->isWall(newCellPosition)*/!getScene()->isWall(newPosition, getSize()))
+        if (!getScene()->isWall(newPosition, getSize()))
             setPosition({ newPosition.getX(), newPosition.getY() });
-        else {
-            setPosition({ getScene()->getSize().getX() * (newCellPosition.getX() + 1), newPosition.getY() });
+        else
             setSpeed({ 0, getSpeed().getY() });
-        }
     }
 
-    if (getSpeed().getY() != 0)
-        setPosition({ getPosition().getX(), (int) (getPosition().getY() + getSpeed().getY() * time) });
+    if (getSpeed().getY() > 0) {
+        Vector2i newPosition = { getPosition().getX(), (int)(getPosition().getY() + getSpeed().getY() * time) };
+
+        if (!getScene()->isWall(newPosition, getSize()))
+            setPosition({ newPosition.getX(), newPosition.getY() });
+        else
+            setSpeed({ getSpeed().getX(), 0 });
+    }
+    else if (getSpeed().getY() < 0) {
+        Vector2i newPosition = { getPosition().getX(), (int)(getPosition().getY() + getSpeed().getY() * time) };
+
+        if (!getScene()->isWall(newPosition, getSize()))
+            setPosition({ newPosition.getX(), newPosition.getY() });
+        else
+            setSpeed({ getSpeed().getX(), 0 });
+    }
+
+    sf::View view;
+    view.setSize(sf::Vector2f(1100, 750));
+
+    if (getPosition().getX() >= 550)
+        view.setCenter(sf::Vector2f(getPosition().getX(), view.getCenter().y));
+    else
+        view.setCenter(sf::Vector2f(550, view.getCenter().y));
+
+    if (getPosition().getY() >= 375)
+        view.setCenter(sf::Vector2f(view.getCenter().x, getPosition().getY()));
+    else
+        view.setCenter(sf::Vector2f(view.getCenter().x, 375));
+
+    
+    //view.setCenter(sf::Vector2f(getPosition().getX(), getPosition().getY()));
+    getScene()->setView(view);
 }

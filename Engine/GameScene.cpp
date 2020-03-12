@@ -1,8 +1,8 @@
 
 #include "GameScene.h"
 
-Engine::GameScene::GameScene(Vector2i count, Vector2i size, Textures* textures) : count(count),
-size(size), textures(textures)
+Engine::GameScene::GameScene(Vector2i count, Vector2i size, Textures* textures, Window* window) : count(count),
+size(size), textures(textures), window(window)
 {
 	scene = new int* [count.getY()];
 
@@ -21,6 +21,10 @@ Engine::GameScene::~GameScene()
 
 	delete textures;
 	delete floor;
+}
+
+void Engine::GameScene::setView(sf::View view) {
+	window->setView(view);
 }
 
 Engine::Vector2i Engine::GameScene::getCount() {
@@ -122,5 +126,6 @@ bool Engine::GameScene::isWall(Vector2i positions, Vector2i size)
 				cellPosition.getX() > count.getX() || cellPosition.getY() > count.getY())
 				return true;
 		}
+
 	return false;
 }

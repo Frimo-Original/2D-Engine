@@ -12,10 +12,9 @@ int main()
 {
     Window* window = new Window(1100, 700, "Game", false);
 
-    window->setGameScene(FirstLevel().getGameScene());
+    window->setGameScene(FirstLevel(window).getGameScene());
 
     window->launch();
-    window->close();
 
 	return 0;
 }

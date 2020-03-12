@@ -11,8 +11,11 @@ Engine::Window::Window(int width, int height, sf::String title, bool resizable) 
 
 Engine::Window::~Window() {
     delete scene;
-    close();
 	delete window;
+}
+
+void Engine::Window::setView(sf::View view) {
+    window->setView(view);
 }
 
 void Engine::Window::setGameScene(Engine::GameScene* scene) {
@@ -33,10 +36,6 @@ void Engine::Window::launch() {
     th = std::thread(&Engine::Window::draw, this);
     lifeCycle();
     th.join();
-}
-
-void Engine::Window::close() {
-	th.~thread();
 }
 
 void Engine::Window::lifeCycle()
