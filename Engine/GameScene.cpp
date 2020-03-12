@@ -107,10 +107,20 @@ Engine::Vector2i Engine::GameScene::getCellPosition(Engine::Vector2i coordinats)
 	return cellPosition;
 }
 
-bool Engine::GameScene::isWall(Vector2i cellPosition) {
-	if (cellPosition.getX() < 0 || cellPosition.getY() < 0 || scene[cellPosition.getY()][cellPosition.getX()] >= 1 ||
-		cellPosition.getX() > count.getX() || cellPosition.getY() > count.getY())
-		return true;
-	return false;
+bool Engine::GameScene::isWall(Vector2i positions, Vector2i size)
+{
+	int countPointsX = getSize().getX() / size.getX() + 1;
+	int countPointsY = getSize().getY() / size.getY() + 1;
 
+	for (int i = 0; i < countPointsY; i++)
+		for (int j = 0; j < countPointsX; j++)
+		{
+			Vector2i cellPosition = getCellPosition({ positions.getX() + (size.getX() / (countPointsX - 1)) * j,
+				positions.getY() + (size.getY() / (countPointsY - 1)) * i });
+
+			if (cellPosition.getX() < 0 || cellPosition.getY() < 0 || scene[cellPosition.getY()][cellPosition.getX()] >= 1 ||
+				cellPosition.getX() > count.getX() || cellPosition.getY() > count.getY())
+				return true;
+		}
+	return false;
 }

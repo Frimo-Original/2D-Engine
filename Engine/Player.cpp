@@ -145,7 +145,7 @@ void Player::run(int time)
         Vector2i newPosition = { (int)(getPosition().getX() + getSpeed().getX() * time) + getSize().getX(), getPosition().getY() };
         Vector2i newCellPosition = getScene()->getCellPosition(newPosition);
 
-        if (!getScene()->isWall(newCellPosition))
+        if (!getScene()->isWall(newCellPosition, getSize()))
             setPosition({ newPosition.getX() - getSize().getX(), newPosition.getY() });
         else {
             setPosition({ getScene()->getSize().getX() * newCellPosition.getX() - getSize().getX(), newPosition.getY() });
@@ -156,9 +156,11 @@ void Player::run(int time)
         Vector2i newPosition = { (int)(getPosition().getX() + getSpeed().getX() * time), getPosition().getY() };
         Vector2i newCellPosition = getScene()->getCellPosition(newPosition);
 
+        //getScene()->checkWall(newPosition, getSize());
+        //std::cout << getScene()->checkWall(newPosition, getSize());
         //std::cout << getPosition().getX() << "  " << newCellPosition.getX() << std::endl;
 
-        if (!getScene()->isWall(newCellPosition))
+        if (/*!getScene()->isWall(newCellPosition)*/!getScene()->isWall(newPosition, getSize()))
             setPosition({ newPosition.getX(), newPosition.getY() });
         else {
             setPosition({ getScene()->getSize().getX() * (newCellPosition.getX() + 1), newPosition.getY() });
