@@ -3,6 +3,8 @@
 #include "GameObject.h"
 #include "PhysicalFunction.h"
 
+#include <math.h>
+
 #include <SFML/Graphics.hpp>
 
 using namespace Engine;

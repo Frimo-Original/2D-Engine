@@ -170,20 +170,12 @@ void Player::run(int time)
             setSpeed({ getSpeed().getX(), 0 });
     }
 
-    /*sf::View view;
-    view.setSize(sf::Vector2f(1100, 750));
-
-    if (getPosition().getX() >= 550)
-        view.setCenter(sf::Vector2f(getPosition().getX(), view.getCenter().y));
-    else
-        view.setCenter(sf::Vector2f(550, view.getCenter().y));
-
-    if (getPosition().getY() >= 375)
-        view.setCenter(sf::Vector2f(view.getCenter().x, getPosition().getY()));
-    else
-        view.setCenter(sf::Vector2f(view.getCenter().x, 375));*/
-
-    
-    //view.setCenter(sf::Vector2f(getPosition().getX(), getPosition().getY()));
-    //getScene()->setView(view);
+    if (speed.getX() == 0 && speed.getY() >= 0)
+        setTexture(0);
+    else if (speed.getX() == 0 && speed.getY() < 0)
+        setTexture(1);
+    else if (speed.getX() < 0)
+        setTexture(3);
+    else if (speed.getX() > 0)
+        setTexture(2);
 }
