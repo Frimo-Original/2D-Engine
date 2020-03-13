@@ -144,12 +144,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="FirstLevel.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="GameTexture.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="OneScene.cpp" />
     <ClCompile Include="PhysicalFunction.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Textures.cpp" />
@@ -158,11 +158,11 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FirstLevel.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameTexture.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="OneScene.h" />
     <ClInclude Include="PhysicalFunction.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Textures.h" />

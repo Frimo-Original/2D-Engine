@@ -45,9 +45,6 @@
     <ClCompile Include="Vector2i.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="FirstLevel.cpp">
-      <Filter>Файлы ресурсов\Levels</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Файлы ресурсов\Levels</Filter>
     </ClCompile>
@@ -56,6 +53,9 @@
     </ClCompile>
     <ClCompile Include="PhysicalFunction.cpp">
       <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="OneScene.cpp">
+      <Filter>Файлы ресурсов\Levels</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -83,14 +83,14 @@
     <ClInclude Include="Vector2i.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="FirstLevel.h">
-      <Filter>Файлы ресурсов\Levels</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Файлы ресурсов\NPC</Filter>
     </ClInclude>
     <ClInclude Include="PhysicalFunction.h">
       <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="OneScene.h">
+      <Filter>Файлы ресурсов\Levels</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

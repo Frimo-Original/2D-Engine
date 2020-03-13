@@ -15,7 +15,7 @@ namespace Engine
 
 	class GameObject
 	{
-	private:
+	protected:
 		GameScene* scene;
 		Textures* textures;
 		sf::Texture* texture;

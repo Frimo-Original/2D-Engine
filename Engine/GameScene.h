@@ -20,7 +20,7 @@ namespace Engine
 
 	class GameScene
 	{
-	private:
+	protected:
 		int** scene;
 
 		Window* window;
@@ -38,8 +38,10 @@ namespace Engine
 
 		void setFloor(Floor* floor);
 		void setTextures(Textures* textures);
+
 		void draw(sf::RenderWindow* window);
-		void run(int time);
+		//void run(int time);
+		virtual void run(int time) = 0;
 
 		void setView(sf::View view);
 
