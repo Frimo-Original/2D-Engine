@@ -1,12 +1,16 @@
 #include "GameObject.h"
 
-Engine::GameObject::GameObject(GameScene* scene, Textures* textures, Vector2i size) :
-	scene(scene), textures(textures), size(size) {
+Engine::GameObject::GameObject(GameScene* scene, std::string id, Textures* textures, Vector2i size) :
+	scene(scene), textures(textures), size(size), id(id) {
 	position = size;
 }
 
 Engine::GameObject::~GameObject() {
 	delete textures;
+}
+
+std::string Engine::GameObject::getId() {
+	return id;
 }
 
 void Engine::GameObject::setTextures(Textures* textures) {

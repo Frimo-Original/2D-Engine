@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Player::Player(GameScene* scene, Vector2i size) : GameObject(scene, NULL, size) {
+Player::Player(GameScene* scene, Vector2i size) : GameObject(scene, "Player", NULL, size) {
     Textures* textures = new Textures();
     textures->addTexture(0, "Textures/Humans/Human.png");
     textures->addTexture(1, "Textures/Humans/Human_bottom.png");
@@ -170,7 +170,7 @@ void Player::run(int time)
             setSpeed({ getSpeed().getX(), 0 });
     }
 
-    sf::View view;
+    /*sf::View view;
     view.setSize(sf::Vector2f(1100, 750));
 
     if (getPosition().getX() >= 550)
@@ -181,9 +181,9 @@ void Player::run(int time)
     if (getPosition().getY() >= 375)
         view.setCenter(sf::Vector2f(view.getCenter().x, getPosition().getY()));
     else
-        view.setCenter(sf::Vector2f(view.getCenter().x, 375));
+        view.setCenter(sf::Vector2f(view.getCenter().x, 375));*/
 
     
     //view.setCenter(sf::Vector2f(getPosition().getX(), getPosition().getY()));
-    getScene()->setView(view);
+    //getScene()->setView(view);
 }

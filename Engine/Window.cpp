@@ -14,6 +14,10 @@ Engine::Window::~Window() {
 	delete window;
 }
 
+Engine::Vector2i Engine::Window::getSize() {
+    return { (int)window->getSize().x, (int)window->getSize().y };
+}
+
 void Engine::Window::setView(sf::View view) {
     window->setView(view);
 }

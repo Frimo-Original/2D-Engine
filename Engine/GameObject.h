@@ -2,6 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <string>
+
 #include "GameScene.h"
 #include "Textures.h"
 #include "GameTexture.h"
@@ -18,13 +20,17 @@ namespace Engine
 		Textures* textures;
 		sf::Texture* texture;
 
+		std::string id;
+
 		Vector2f speed = { 0, 0 };
 		Vector2i position;
 		Vector2i size;
 
 	public:
-		GameObject(GameScene* scene, Textures* textures, Vector2i size);
+		GameObject(GameScene* scene, std::string id, Textures* textures, Vector2i size);
 		~GameObject();
+
+		std::string getId();
 
 		void setTextures(Textures* textures);
 		void setTexture(int number);

@@ -29,6 +29,8 @@ namespace Engine
 
 		void setView(sf::View view);
 
+		Vector2i getSize();
+
 		void setVisible(bool visible);
 		bool getVisible();
 

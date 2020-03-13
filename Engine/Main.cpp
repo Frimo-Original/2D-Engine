@@ -18,13 +18,3 @@ int main()
 
 	return 0;
 }
-
-/*class Player : public GameObject
-{
-public:
-    Player(GameScene* scene, Textures* textures, Vector2i size) : GameObject(scene, textures, size) { }
-
-    void run() override {
-
-    }
-};*/

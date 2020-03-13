@@ -63,9 +63,37 @@ void Engine::GameScene::setTextures(Textures* textures) {
 	this->textures = textures;
 }
 
-void Engine::GameScene::run(int time) {
-	for (GameObject* obj : gameObjects)
+void Engine::GameScene::run(int time)
+{
+	for (GameObject* obj : gameObjects) {
 		obj->run(time);
+
+		if (obj->getId() == "Player") {
+			Vector2i positionsPlayer = obj->getPosition();
+			Vector2i sizePlayer = obj->getSize();
+			Vector2i sizeWindow = window->getSize();
+			Vector2i sizeScene = { count.getX() * size.getX(), count.getY() * size.getY() };
+
+			sf::View view;
+			view.setSize(sizeWindow.getX(), sizeWindow.getY());
+
+			if (positionsPlayer.getX() <= sizeWindow.getX() / 2 - sizePlayer.getX() / 2)
+				view.setCenter(sf::Vector2f(sizeWindow.getX() / 2, view.getCenter().y));
+			else if (positionsPlayer.getX() >= sizeScene.getX() - sizeWindow.getX() / 2 - sizePlayer.getX() / 2)
+				view.setCenter(sf::Vector2f(sizeScene.getX() - sizeWindow.getX() / 2, view.getCenter().y));
+			else
+				view.setCenter(sf::Vector2f(positionsPlayer.getX() + sizePlayer.getX() / 2, view.getCenter().y));
+
+			if (positionsPlayer.getY() <= sizeWindow.getY() / 2 - sizePlayer.getY() / 2)
+				view.setCenter(sf::Vector2f(view.getCenter().x, sizeWindow.getY() / 2));
+			else if (positionsPlayer.getY() >= sizeScene.getY() - sizeWindow.getY() / 2 - sizePlayer.getY() / 2)
+				view.setCenter(sf::Vector2f(view.getCenter().x, sizeScene.getY() - sizeWindow.getY() / 2));
+			else
+				view.setCenter(sf::Vector2f(view.getCenter().x, positionsPlayer.getY() + sizePlayer.getY() / 2));
+
+			window->setView(view);
+		}
+	}
 }
 
 void Engine::GameScene::draw(sf::RenderWindow* window)
@@ -122,8 +150,9 @@ bool Engine::GameScene::isWall(Vector2i positions, Vector2i size)
 			Vector2i cellPosition = getCellPosition({ positions.getX() + (size.getX() / (countPointsX - 1)) * j,
 				positions.getY() + (size.getY() / (countPointsY - 1)) * i });
 
-			if (cellPosition.getX() < 0 || cellPosition.getY() < 0 || scene[cellPosition.getY()][cellPosition.getX()] >= 1 ||
-				cellPosition.getX() > count.getX() || cellPosition.getY() > count.getY())
+			if (cellPosition.getX() < 0 || cellPosition.getY() < 0 || cellPosition.getX() >= count.getX() ||
+				cellPosition.getY() >= count.getY()
+				|| scene[cellPosition.getY()][cellPosition.getX()] >= 1)
 				return true;
 		}
 
