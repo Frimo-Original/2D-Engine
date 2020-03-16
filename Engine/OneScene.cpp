@@ -17,21 +17,19 @@ OneScene::OneScene(Window* window) : GameScene({ 44, 28 }, { 40, 40 }, NULL, win
 
 void OneScene::run(int time)
 {
-	Vector2i positionsPlayer;
-	Vector2i sizePlayer;
-	Vector2i sizeWindow = window->getSize();
-
-	Vector2i sizeScene = { count.getX() * size.getX(), count.getY() * size.getY() };
-
-	sf::View view = window->getView();
 	GameScene::run(time);
+
+	Vector2i centerPlayer;
+	Vector2i sizeScene = { count.getX() * size.getX(), count.getY() * size.getY() };
+	sf::View view = window->getView();
 
 	for (GameObject* obj : gameObjects) {
 		if (obj->getId() == "Player")
 		{
 			Vector2i positionsPlayer = obj->getPosition();
 			Vector2i sizePlayer = obj->getSize();
-			Vector2i centerPlayer = { positionsPlayer.getX() + sizePlayer.getX() / 2, positionsPlayer.getY() + sizePlayer.getY() / 2 };
+			Vector2i sizeWindow = window->getSize();
+			centerPlayer = { positionsPlayer.getX() + sizePlayer.getX() / 2, positionsPlayer.getY() + sizePlayer.getY() / 2 };
 			Vector2i centerWindow = { sizeWindow.getX() / 2, sizeWindow.getY() / 2 };
 
 			if (centerPlayer.getX() > centerWindow.getX() && centerPlayer.getX() < sizeScene.getX() - centerWindow.getX())
@@ -45,15 +43,10 @@ void OneScene::run(int time)
 	}
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-		/*if (positionsPlayer.getX() > sizeWindow.getX() / 2 &&
-			positionsPlayer.getX() < sizeScene.getX() - sizeWindow.getX() / 2)
-		{
-			Vector2i positionsBullet = { positionsPlayer.getX() - ((int)view.getSize().x / 2 - window->getMousePosition().getX()),
-			positionsPlayer.getY() - ((int)view.getSize().y / 2 - window->getMousePosition().getY()) };
-			addObject(new Bullet(this, positionsBullet, { 0, 0 }));
-		}
-		else {*/
-			addObject(new Bullet(this, window->getMousePosition(), { 0, 0 }));
-		//}
+		Vector2i mouseClick = window->getMousePosition();
+		Vector2i mousePosition = { (int)(view.getCenter().x - view.getSize().x / 2 + mousePosition.getX()),
+		(int)(view.getCenter().y - view.getSize().y / 2 + mousePosition.getY()) };
+	
+		addObject(new Bullet(this, centerPlayer, { 0, 0 }));
 	}
 }
