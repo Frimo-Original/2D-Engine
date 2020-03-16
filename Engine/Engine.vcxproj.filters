@@ -57,6 +57,9 @@
     <ClCompile Include="OneScene.cpp">
       <Filter>Файлы ресурсов\Levels</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Файлы ресурсов\NPC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Textures.h">
@@ -91,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="OneScene.h">
       <Filter>Файлы ресурсов\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Файлы ресурсов\NPC</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

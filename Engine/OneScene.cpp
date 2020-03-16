@@ -2,6 +2,10 @@
 #include "Player.h"
 #include "Bullet.h"
 
+#include <math.h>
+
+#include <iostream>
+
 OneScene::OneScene(Window* window) : GameScene({ 44, 28 }, { 40, 40 }, NULL, window) {
 	Textures* texturesLevels = new Textures();
 	texturesLevels->addTexture(1, "Textures/Levels/One/Walls/Wall_1.png");
@@ -44,9 +48,13 @@ void OneScene::run(int time)
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 		Vector2i mouseClick = window->getMousePosition();
-		Vector2i mousePosition = { (int)(view.getCenter().x - view.getSize().x / 2 + mousePosition.getX()),
-		(int)(view.getCenter().y - view.getSize().y / 2 + mousePosition.getY()) };
+		Vector2i mousePosition = { (int)(view.getCenter().x - view.getSize().x / 2 + mouseClick.getX()),
+		(int)(view.getCenter().y - view.getSize().y / 2 + mouseClick.getY()) };
+
+		float x = centerPlayer.getX() - mousePosition.getX(), y = centerPlayer.getY() - mousePosition.getY();
+		float difference = sqrt(x * x + y * y) / 0.6;  //0.6 - module speed bullet
+		//std::cout << x / difference << " " << y / difference << " " << difference << std::endl;
 	
-		addObject(new Bullet(this, centerPlayer, { 0, 0 }));
+		addObject(new Bullet(this, centerPlayer, { x / difference, y / difference }));
 	}
 }
