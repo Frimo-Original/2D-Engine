@@ -15,6 +15,9 @@ namespace Engine
 
 	class GameObject
 	{
+	private:
+		bool statusDelete = false;
+
 	protected:
 		GameScene* scene;
 		Textures* textures;
@@ -26,10 +29,13 @@ namespace Engine
 		Vector2i position;
 		Vector2i size;
 
+		void setStatusDelete(bool status);
+
 	public:
 		GameObject(GameScene* scene, std::string id, Textures* textures, Vector2i size);
 		~GameObject();
 
+		bool isDelete();
 		std::string getId();
 
 		void setTextures(Textures* textures);

@@ -40,7 +40,6 @@ namespace Engine
 		void setTextures(Textures* textures);
 
 		void draw(sf::RenderWindow* window);
-		//void run(int time);
 		virtual void run(int time) = 0;
 
 		void setView(sf::View view);
@@ -49,7 +48,7 @@ namespace Engine
 		Vector2i getSize();
 
 		void addObject(GameObject* object);
-		void deleteObject(GameObject* object);
+		void deleteObject(/*GameObject* object*/);
 
 		void fillScene(int value);
 		void setWalls(int numberRow, std::string row);

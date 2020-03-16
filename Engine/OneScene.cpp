@@ -1,5 +1,6 @@
 #include "OneScene.h"
 #include "Player.h"
+#include "Bullet.h"
 
 OneScene::OneScene(Window* window) : GameScene({ 44, 28 }, { 40, 40 }, NULL, window) {
 	Textures* texturesLevels = new Textures();
@@ -16,33 +17,43 @@ OneScene::OneScene(Window* window) : GameScene({ 44, 28 }, { 40, 40 }, NULL, win
 
 void OneScene::run(int time)
 {
-	for (GameObject* obj : gameObjects) {
-		obj->run(time);
+	Vector2i positionsPlayer;
+	Vector2i sizePlayer;
+	Vector2i sizeWindow = window->getSize();
 
-		if (obj->getId() == "Player") {
+	Vector2i sizeScene = { count.getX() * size.getX(), count.getY() * size.getY() };
+
+	sf::View view = window->getView();
+	GameScene::run(time);
+
+	for (GameObject* obj : gameObjects) {
+		if (obj->getId() == "Player")
+		{
 			Vector2i positionsPlayer = obj->getPosition();
 			Vector2i sizePlayer = obj->getSize();
-			Vector2i sizeWindow = window->getSize();
-			Vector2i sizeScene = { count.getX() * size.getX(), count.getY() * size.getY() };
+			Vector2i centerPlayer = { positionsPlayer.getX() + sizePlayer.getX() / 2, positionsPlayer.getY() + sizePlayer.getY() / 2 };
+			Vector2i centerWindow = { sizeWindow.getX() / 2, sizeWindow.getY() / 2 };
 
-			sf::View view;
-			view.setSize(sizeWindow.getX(), sizeWindow.getY());
-
-			if (positionsPlayer.getX() <= sizeWindow.getX() / 2 - sizePlayer.getX() / 2)
-				view.setCenter(sf::Vector2f(sizeWindow.getX() / 2, view.getCenter().y));
-			else if (positionsPlayer.getX() >= sizeScene.getX() - sizeWindow.getX() / 2 - sizePlayer.getX() / 2)
-				view.setCenter(sf::Vector2f(sizeScene.getX() - sizeWindow.getX() / 2, view.getCenter().y));
-			else
-				view.setCenter(sf::Vector2f(positionsPlayer.getX() + sizePlayer.getX() / 2, view.getCenter().y));
-
-			if (positionsPlayer.getY() <= sizeWindow.getY() / 2 - sizePlayer.getY() / 2)
-				view.setCenter(sf::Vector2f(view.getCenter().x, sizeWindow.getY() / 2));
-			else if (positionsPlayer.getY() >= sizeScene.getY() - sizeWindow.getY() / 2 - sizePlayer.getY() / 2)
-				view.setCenter(sf::Vector2f(view.getCenter().x, sizeScene.getY() - sizeWindow.getY() / 2));
-			else
-				view.setCenter(sf::Vector2f(view.getCenter().x, positionsPlayer.getY() + sizePlayer.getY() / 2));
+			if (centerPlayer.getX() > centerWindow.getX() && centerPlayer.getX() < sizeScene.getX() - centerWindow.getX())
+				view.setCenter({ (float)(centerPlayer.getX()), view.getCenter().y });
+			
+			if (centerPlayer.getY() > centerWindow.getY() && centerPlayer.getY() < sizeScene.getY() - centerWindow.getY())
+				view.setCenter({ view.getCenter().x, (float)(centerPlayer.getY()) });
 
 			window->setView(view);
 		}
+	}
+
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+		/*if (positionsPlayer.getX() > sizeWindow.getX() / 2 &&
+			positionsPlayer.getX() < sizeScene.getX() - sizeWindow.getX() / 2)
+		{
+			Vector2i positionsBullet = { positionsPlayer.getX() - ((int)view.getSize().x / 2 - window->getMousePosition().getX()),
+			positionsPlayer.getY() - ((int)view.getSize().y / 2 - window->getMousePosition().getY()) };
+			addObject(new Bullet(this, positionsBullet, { 0, 0 }));
+		}
+		else {*/
+			addObject(new Bullet(this, window->getMousePosition(), { 0, 0 }));
+		//}
 	}
 }

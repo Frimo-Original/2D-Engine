@@ -9,6 +9,14 @@ Engine::GameObject::~GameObject() {
 	delete textures;
 }
 
+void Engine::GameObject::setStatusDelete(bool status) {
+	statusDelete = status;
+}
+
+bool Engine::GameObject::isDelete() {
+	return statusDelete;
+}
+
 std::string Engine::GameObject::getId() {
 	return id;
 }

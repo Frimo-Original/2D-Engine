@@ -14,8 +14,17 @@ Engine::Window::~Window() {
 	delete window;
 }
 
+Engine::Vector2i Engine::Window::getMousePosition() {
+    sf::Vector2i localPosition = sf::Mouse::getPosition(*window);
+    return { localPosition.x, localPosition.y };
+}
+
 Engine::Vector2i Engine::Window::getSize() {
     return { (int)window->getSize().x, (int)window->getSize().y };
+}
+
+sf::View Engine::Window::getView() {
+    return window->getView();
 }
 
 void Engine::Window::setView(sf::View view) {
@@ -68,6 +77,8 @@ void Engine::Window::draw()
 
         if (scene != NULL)
             scene->draw(window);
+
+        scene->deleteObject();
 
         window->display();
     }

@@ -23,6 +23,11 @@ Engine::GameScene::~GameScene()
 	delete floor;
 }
 
+void Engine::GameScene::run(int time) {
+	for (GameObject* obj : gameObjects)
+		obj->run(time);
+}
+
 void Engine::GameScene::setView(sf::View view) {
 	window->setView(view);
 }
@@ -39,9 +44,14 @@ void Engine::GameScene::addObject(GameObject* object) {
 	gameObjects.push_back(object);
 }
 
-void Engine::GameScene::deleteObject(GameObject* object) {
-	for (int i = 0; i < gameObjects.size(); i++)
+void Engine::GameScene::deleteObject(/*GameObject* object*/) {
+	/*for (int i = 0; i < gameObjects.size(); i++)
 		if (gameObjects[i] == object) {
+			delete gameObjects[i];
+			gameObjects.erase(gameObjects.begin() + i);
+		}*/
+	for (int i = 0; i < gameObjects.size(); i++)
+		if (gameObjects[i]->isDelete()) {
 			delete gameObjects[i];
 			gameObjects.erase(gameObjects.begin() + i);
 		}
@@ -67,7 +77,7 @@ void Engine::GameScene::draw(sf::RenderWindow* window)
 {
 	if (floor != NULL)
 		floor->draw(window);
-
+	
 	for (int i = 0; i < count.getY(); i++)
 		for (int j = 0; j < count.getX(); j++)
 			if (scene[i][j] != 0) {

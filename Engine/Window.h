@@ -25,8 +25,11 @@ namespace Engine
 		Window(int width, int height, sf::String title = "", bool resizable = true);
 		~Window();
 
+		Vector2i getMousePosition();
+
 		void setGameScene(GameScene* scene);
 
+		sf::View getView();
 		void setView(sf::View view);
 
 		Vector2i getSize();
