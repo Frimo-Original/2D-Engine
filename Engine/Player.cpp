@@ -14,8 +14,8 @@ Player::Player(GameScene* scene, Vector2i size) : GameObject(scene, "Player", NU
 
 void Player::run(int time)
 {
-    float maxModule = 0.23;  //0.21
-    float maxSpeed = 0.3;  //0.3
+    float maxModule = 0.23;
+    float maxSpeed = 0.3;
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         if (speed.getY() == 0)
@@ -47,10 +47,13 @@ void Player::run(int time)
     else
         speed = { speed.getX(), 0 };
 
-    Vector2f newPositions = { positions.getX() + time * speed.getX(), positions.getY() + time * speed.getY() };
+    float newPositionsX = positions.getX() + time * speed.getX();
+    float newPositionsY = positions.getY() + time * speed.getY();
 
-    if (!getScene()->isWall(newPositions, size))
-        positions = newPositions;
+    if (!getScene()->isWall({ newPositionsX, positions.getY() }, size))
+        positions = { newPositionsX, positions.getY() };
+    if (!getScene()->isWall({ positions.getX(), newPositionsY }, size))
+        positions = { positions.getX(), newPositionsY };
 
     if (speed.getX() == 0 && speed.getY() >= 0)
         setTexture(0);

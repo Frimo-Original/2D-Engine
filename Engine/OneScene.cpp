@@ -1,6 +1,5 @@
 #include "OneScene.h"
 #include "Player.h"
-//#include "Bullet.h"
 
 #include <math.h>
 
@@ -15,7 +14,17 @@ OneScene::OneScene(Window* window) : GameScene({ 45, 29 }, { 40, 40 }, NULL, win
 	setWalls(1, "0000100000");
 	setWalls(2, "0000100000");
 	setWalls(5, "1111100000");*/
+	setWall({ 12, 8 }, 1);
+	setWall({ 22, 8 }, 1);
+	setWall({ 32, 8 }, 1);
+
+	setWall({ 12, 14 }, 1);
 	setWall({ 22, 14 }, 1);
+	setWall({ 32, 14 }, 1);
+
+	setWall({ 12, 20 }, 1);
+	setWall({ 22, 20 }, 1);
+	setWall({ 32, 20 }, 1);
 
 	addObject(new Player(this, { 25, 32 }));
 }
