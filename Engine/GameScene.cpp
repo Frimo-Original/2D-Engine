@@ -23,7 +23,13 @@ Engine::GameScene::~GameScene()
 	delete floor;
 }
 
+Engine::Window* Engine::GameScene::getWindow() {
+	return window;
+}
+
 void Engine::GameScene::run(int time) {
+	addObjectsFromBuffer();
+
 	for (GameObject* obj : gameObjects)
 		obj->run(time);
 }
@@ -41,15 +47,18 @@ Engine::Vector2i Engine::GameScene::getSize() {
 }
 
 void Engine::GameScene::addObject(GameObject* object) {
-	gameObjects.push_back(object);
+	bufferGameObjects.push_back(object);
+	//gameObjects.push_back(object);
 }
 
-void Engine::GameScene::deleteObject(/*GameObject* object*/) {
-	/*for (int i = 0; i < gameObjects.size(); i++)
-		if (gameObjects[i] == object) {
-			delete gameObjects[i];
-			gameObjects.erase(gameObjects.begin() + i);
-		}*/
+void Engine::GameScene::addObjectsFromBuffer() {
+	for (GameObject* i : bufferGameObjects)
+		gameObjects.push_back(i);
+
+	bufferGameObjects.clear();
+}
+
+void Engine::GameScene::deleteObject() {
 	for (int i = 0; i < gameObjects.size(); i++)
 		if (gameObjects[i]->isDelete()) {
 			delete gameObjects[i];
@@ -101,22 +110,26 @@ void Engine::GameScene::setWalls(int numberRow, std::string row)
 		}
 }
 
-Engine::Vector2i Engine::GameScene::getCellPosition(Engine::Vector2i coordinats) {
+void Engine::GameScene::setWall(Engine::Vector2i positions, int value) {
+	scene[positions.getY()][positions.getX()] = value;
+}
+
+Engine::Vector2i Engine::GameScene::getCellPosition(Engine::Vector2f positions) {
 	Vector2i cellPosition = { 0, 0 };
-	
-	if (coordinats.getX() < 0)
+
+	if (positions.getX() < 0)
 		cellPosition.setX(-1);
 	else
-		cellPosition.setX((int)(coordinats.getX() / size.getX()));
-	if (coordinats.getY() < 0)
+		cellPosition.setX((int)(positions.getX() / size.getX()));
+	if (positions.getY() < 0)
 		cellPosition.setY(-1);
 	else
-		cellPosition.setY((int)(coordinats.getY() / size.getY()));
+		cellPosition.setY((int)(positions.getY() / size.getY()));
 
 	return cellPosition;
 }
 
-bool Engine::GameScene::isWall(Vector2i positions, Vector2i size)
+bool Engine::GameScene::isWall(Vector2f positions, Vector2i size)
 {
 	int countPointsX = getSize().getX() / size.getX() + 1;
 	int countPointsY = getSize().getY() / size.getY() + 1;

@@ -2,7 +2,7 @@
 
 Engine::GameObject::GameObject(GameScene* scene, std::string id, Textures* textures, Vector2i size) :
 	scene(scene), textures(textures), size(size), id(id) {
-	position = size;
+	positions = { 0, 0 };
 }
 
 Engine::GameObject::~GameObject() {
@@ -32,7 +32,7 @@ void Engine::GameObject::setTexture(int number) {
 
 void Engine::GameObject::draw(sf::RenderWindow* window) {
 	sf::Sprite sp = sf::Sprite(*texture);
-	sp.setPosition(getPosition().getX(), getPosition().getY());
+	sp.setPosition(getPositions().getX(), getPositions().getY());
 	window->draw(sp);
 }
 
@@ -44,12 +44,16 @@ Engine::Vector2i Engine::GameObject::getSize() {
 	return size;
 }
 
-void Engine::GameObject::setPosition(Engine::Vector2i position) {
-	this->position = position;
+void Engine::GameObject::setPositions(Engine::Vector2f position) {
+	this->positions = position;
 }
 
-Engine::Vector2i Engine::GameObject::getPosition() {
-	return position;
+Engine::Vector2f Engine::GameObject::getPositions() {
+	return positions;
+}
+
+Engine::Vector2f Engine::GameObject::getCenter() {
+	return { positions.getX() + (float)size.getX() / 2, positions.getY() + (float)size.getY() / 2 };
 }
 
 void Engine::GameObject::setSpeed(Engine::Vector2f speed) {

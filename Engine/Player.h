@@ -2,6 +2,7 @@
 
 #include "GameObject.h"
 #include "PhysicalFunction.h"
+#include "Bullet.h"
 
 #include <math.h>
 
@@ -11,7 +12,9 @@ using namespace Engine;
 
 class Player : public GameObject
 {
-	//Player(GameScene* scene, Textures* textures, Vector2i size);
+private:
+	int frequency = 200, timer = 2000;
+
 public:
 	Player(GameScene* scene, Vector2i size);
 

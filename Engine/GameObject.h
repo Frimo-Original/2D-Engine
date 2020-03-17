@@ -26,7 +26,7 @@ namespace Engine
 		std::string id;
 
 		Vector2f speed = { 0, 0 };
-		Vector2i position;
+		Vector2f positions;
 		Vector2i size;
 
 		void setStatusDelete(bool status);
@@ -44,8 +44,10 @@ namespace Engine
 		void setSize(Vector2i size);
 		Vector2i getSize();
 
-		void setPosition(Vector2i position);
-		Vector2i getPosition();
+		void setPositions(Vector2f position);
+		Vector2f getPositions();
+
+		Vector2f getCenter();
 
 		void setSpeed(Vector2f speed);
 		Vector2f getSpeed();
