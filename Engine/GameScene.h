@@ -14,6 +14,8 @@
 #include "Vector2f.h"
 #include "Window.h"
 
+#include <algorithm>
+
 namespace Engine
 {
 	class GameObject;
@@ -63,5 +65,7 @@ namespace Engine
 
 		Vector2i getCellPosition(Vector2f positions);
 		bool isWall(Vector2f positions, Vector2i size);
+
+		std::vector<GameObject*> getObjectsCollisions(Engine::GameObject* object);
 	};
 }

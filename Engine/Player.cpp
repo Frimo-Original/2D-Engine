@@ -72,7 +72,7 @@ void Player::run(int time)
             float x = mousePosition.getX() - getCenter().getX(), y = mousePosition.getY() - getCenter().getY();
             float difference = sqrt(x * x + y * y) / 0.65;  //0.7 - module speed bullet
 
-            getScene()->addObject(new Bullet(getScene(), getCenter(), { x / difference, y / difference }));
+            getScene()->addObject(new Bullet(getScene(), getCenter(), { x / difference, y / difference }, Damage(10)));
 
             timer = 0;
         }

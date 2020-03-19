@@ -60,6 +60,15 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>Файлы ресурсов\NPC</Filter>
     </ClCompile>
+    <ClCompile Include="Gun.cpp">
+      <Filter>Файлы ресурсов\NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="Damage.cpp">
+      <Filter>Файлы ресурсов\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Health.cpp">
+      <Filter>Файлы ресурсов\Levels</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Textures.h">
@@ -97,6 +106,15 @@
     </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>Файлы ресурсов\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Gun.h">
+      <Filter>Файлы ресурсов\NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="Damage.h">
+      <Filter>Файлы ресурсов\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="Health.h">
+      <Filter>Файлы ресурсов\Levels</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -48,7 +48,6 @@ Engine::Vector2i Engine::GameScene::getSize() {
 
 void Engine::GameScene::addObject(GameObject* object) {
 	bufferGameObjects.push_back(object);
-	//gameObjects.push_back(object);
 }
 
 void Engine::GameScene::addObjectsFromBuffer() {
@@ -147,4 +146,29 @@ bool Engine::GameScene::isWall(Vector2f positions, Vector2i size)
 		}
 
 	return false;
+}
+
+std::vector<Engine::GameObject*> Engine::GameScene::getObjectsCollisions(Engine::GameObject* object)
+{
+	std::vector<Engine::GameObject*> collisions;
+
+	for (GameObject* i : gameObjects) {
+		if (i != object) {
+			int left = std::max(object->getPositions().getX(), i->getPositions().getX());
+			int right = std::min(object->getPositions().getX() + object->getSize().getX(),
+				i->getPositions().getX() + i->getSize().getX());
+
+			int top = std::min(object->getPositions().getY(), i->getPositions().getX());
+			int bottom = std::max(object->getPositions().getY() + object->getSize().getY(),
+				i->getPositions().getY() + i->getSize().getY());
+
+			int width = right - left;
+			int height = bottom - top;
+
+			if (!(width < 0 || height < 0))
+				collisions.push_back(i);
+		}
+	}
+
+	return collisions;
 }

@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include "PhysicalFunction.h"
 #include "Bullet.h"
+#include "Damage.h"
 
 #include <math.h>
 

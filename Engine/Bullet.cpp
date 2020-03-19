@@ -1,7 +1,7 @@
 #include "Bullet.h"
 
-Bullet::Bullet(GameScene* scene, Vector2f positions, Vector2f speed) :
-	GameObject(scene, "Bullet", NULL, {11, 11})
+Bullet::Bullet(GameScene* scene, Vector2f positions, Vector2f speed, Damage damage) :
+	GameObject(scene, "Bullet", NULL, {11, 11}), damage(damage)
 {
     Textures* textures = new Textures();
     textures->addTexture(0, "Textures/Bullets/Bullet.png");
@@ -20,4 +20,8 @@ void Bullet::run(int time) {
     }
     else
         setStatusDelete(true);
+}
+
+Damage Bullet::getDamage() {
+    return damage;
 }
